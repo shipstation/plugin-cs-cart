@@ -1,0 +1,61 @@
+<?xml version="1.0"?>
+<addon scheme='2.0'>
+    <id>shipstation</id>
+    <version>1.1</version>
+    <default_language>en</default_language>
+    <name>ShipStation</name>
+    <description>ShipStation interaction</description>
+    <priority>100</priority>
+    <status>active</status>
+    <translations> 
+        <item for="name" lang="ru">ShipStation</item>
+        <item for="description" lang="ru">Интеграция с ShipStation</item>
+    </translations>
+    <queries>
+        <item for="install">ALTER TABLE `?:orders` ADD `last_modify` int(11) NOT NULL DEFAULT 0</item>
+        <item for="uninstall">ALTER TABLE `?:orders` DROP `last_modify`</item>
+    </queries>
+
+    <settings>
+        <sections>
+            <section id="general">
+                <name>General</name>        
+                <items>
+                    <item id="info">
+                        <name>Store URL</name>
+                        <type>info</type>
+                        <handler>fn_shipstation_get_store_url</handler>
+                    </item>
+                    <item id="username">
+                        <type>input</type>
+                        <name>ShipStation account username</name>
+                        <default_value></default_value>
+                    </item>
+                    <item id="password">
+                        <type>password</type>
+                        <name>Password</name>
+                        <default_value></default_value>
+                    </item>
+                    <item id="shipped_statuses">
+                        <type>multiple checkboxes</type>
+                        <name>Shipped statuses</name>                
+                    </item>
+                </items>
+            </section>
+        </sections>
+    </settings>
+
+    
+    <language_variables>
+        <!--
+        <item lang="en" id="test_xml_1.0_1">First language variable</item>
+        <item lang="en" id="test_xml_1.0_2">Second language variable</item>
+        -->
+    </language_variables>
+    
+    <functions>
+        <item for="install">fn_shipstation_add_settings</item>
+        <item for="uninstall">fn_shipstation_remove_settings</item>
+    </functions>
+</addon>
+
