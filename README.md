@@ -1,7 +1,7 @@
 # Overview
  [ShipStation](https://www.shipstation.com/)  leads the ecommerce world with our web-based software designed to make ecommerce retailers exceptionally efficient at processing, fulfilling, and shipping their orders from all the most popular marketplaces and shopping carts using all the top carriers.
 Save time and money with efficient shipping. Sync all your orders from CS-Cart and wherever you sell and start printing labels from all the major carriers with a few clicks.
-Shipping can be unnecessarily complicated and inefficient. ShipStation makes it easy for Magento users to scale their businesses by eliminating those complications. Gone are the days of copy-paste. When you install and connect the extension, ShipStation imports your orders. Process your orders with automation rules and flexible workflows and ship them out with the best carrier, service, and rates to fit your needs.
+Shipping can be unnecessarily complicated and inefficient. ShipStation makes it easy for CS-Cart users to scale their businesses by eliminating those complications. Gone are the days of copy-paste. When you install and connect the extension, ShipStation imports your orders. Process your orders with automation rules and flexible workflows and ship them out with the best carrier, service, and rates to fit your needs.
  
 ## Account and Pricing
 This is a free extension that connects ShipStation to your CS-Cart store. You will need a ShipStation account. Subscriptions [start at only $9 per month](https://www.shipstation.com/pricing/)  and include a free USPS postage account with deeply discounted rates.
