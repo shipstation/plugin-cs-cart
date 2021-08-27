@@ -26,10 +26,6 @@ Shipping and fulfillment is an extension of your brand. Take advantage of ShipSt
 **Returns made easy**
 Create a customer-friendly, self-service Branded Returns Portal with your colors, logo, and social channels and save time and money on returns while looking great.
  
-## Case Study: Rural King
-Rural King’s eCommerce Team chose ShipStation as their shipping platform of choice because of its powerful API and automation rules. When orders import from Magento OMS, shipping methods and presets are instantly applied by SKU. Tags and filters help them control where highly regulated products can be sent. 
- [Read more at ShipStation.com](https://www.shipstation.com/stories/rural-king/) 
-
 ### Here are some helpful links with additional information:
  [CS-Cart Integration Overview](https://www.shipstation.com/partners/cs-cart/) 
 
