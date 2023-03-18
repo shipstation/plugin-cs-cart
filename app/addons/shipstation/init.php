@@ -17,17 +17,7 @@ if (!defined('BOOTSTRAP')) { die('Access denied'); }
 fn_register_hooks(
     'create_order',
     'update_order',
-    'change_order_status',
-    'update_status_post',
-    'delete_status_post'
+    'update_order_details_post',
+    'change_order_status_post',
+    'pre_update_order'
 );
-
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-	$disptch_method = isset($_REQUEST['dispatch']) ? $_REQUEST['dispatch'] : 0 ;
-	if(is_array($disptch_method) && array_key_exists("orders.update_details", $disptch_method)) {
-		$order_id = isset($_REQUEST['order_id']) ? $_REQUEST['order_id'] : 0 ;
-		if($order_id){
-	    	db_query("UPDATE ?:orders SET last_modify = ?s WHERE order_id = ?i", time(), $order_id);
-		}
-    }
-}

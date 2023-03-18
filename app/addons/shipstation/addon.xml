@@ -1,61 +1,64 @@
 <?xml version="1.0"?>
-<addon scheme='2.0'>
+<addon scheme="3.0">
     <id>shipstation</id>
-    <version>1.1</version>
-    <default_language>en</default_language>
     <name>ShipStation</name>
     <description>ShipStation interaction</description>
+    <version>2.2.1</version> 
     <priority>100</priority>
     <status>active</status>
-    <translations> 
-        <item for="name" lang="ru">ShipStation</item>
-        <item for="description" lang="ru">Интеграция с ShipStation</item>
-    </translations>
+    <position>0</position>
+    <supplier>ShipStation</supplier>
+    <supplier_link>https://shipstation.com</supplier_link>
+    <default_language>en</default_language>
     <queries>
         <item for="install">ALTER TABLE `?:orders` ADD `last_modify` int(11) NOT NULL DEFAULT 0</item>
         <item for="uninstall">ALTER TABLE `?:orders` DROP `last_modify`</item>
     </queries>
-
-    <settings>
+    <settings edition_type="ROOT,ULT:VENDOR">
         <sections>
-            <section id="general">
-                <name>General</name>        
+            <section id="general" edition_type="ROOT,ULT:VENDOR">
                 <items>
-                    <item id="info">
-                        <name>Store URL</name>
+                    <item id="store_url" edition_type="ROOT,ULT:VENDOR">
                         <type>info</type>
-                        <handler>fn_shipstation_get_store_url</handler>
+                        <handler>fn_shipstation_get_store_url_handler</handler>
                     </item>
-                    <item id="username">
+                    <item id="username" edition_type="ROOT,ULT:VENDOR">
                         <type>input</type>
-                        <name>ShipStation account username</name>
                         <default_value></default_value>
                     </item>
-                    <item id="password">
+                    <item id="password" edition_type="ROOT,ULT:VENDOR">
                         <type>password</type>
-                        <name>Password</name>
                         <default_value></default_value>
                     </item>
-                    <item id="shipped_statuses">
+                    <item id="shipped_status_final" edition_type="ROOT,ULT:VENDOR">
+                        <type>selectbox</type>
+                        <default_value>C</default_value>
+                    </item>
+                    <item id="shipped_statuses" edition_type="ROOT,ULT:VENDOR">
                         <type>multiple checkboxes</type>
-                        <name>Shipped statuses</name>                
+                    </item>
+                    <item id="export_num_orders_per_page" edition_type="ROOT">
+                        <type>input</type>
+                        <default_value>20</default_value>
+                    </item>
+                    <item id="force_restricted_ips" edition_type="ROOT">
+                        <type>selectbox</type>
+                        <default_value>no</default_value>
+                        <variants>
+                            <item id="no"></item>
+                            <item id="yes"></item>
+                        </variants>
+                    </item>
+                    <item id="ip_addresses_allowed" edition_type="ROOT">
+                        <type>textarea</type>
+                        <default_value></default_value>
+                    </item>
+                    <item id="ip_restriction_info" edition_type="ROOT">
+                        <type>info</type>
+                        <handler>fn_shipstation_get_ip_restriction_info_handler</handler>
                     </item>
                 </items>
             </section>
         </sections>
     </settings>
-
-    
-    <language_variables>
-        <!--
-        <item lang="en" id="test_xml_1.0_1">First language variable</item>
-        <item lang="en" id="test_xml_1.0_2">Second language variable</item>
-        -->
-    </language_variables>
-    
-    <functions>
-        <item for="install">fn_shipstation_add_settings</item>
-        <item for="uninstall">fn_shipstation_remove_settings</item>
-    </functions>
 </addon>
-
