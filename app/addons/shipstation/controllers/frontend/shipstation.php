@@ -13,7 +13,7 @@
  ****************************************************************************/
 
 header('Content-Type: text/xml');
-header('Plugin-Version: 1.0.10');
+header('Plugin-Version: 1.0.12');
 
 if (!defined('BOOTSTRAP')) {
     die('Access denied');
@@ -24,24 +24,55 @@ use Tygh\Registry;
 $action = strtolower($_REQUEST['action']);
 
 $post_data = '';
+
+// Check credentials before anything else.
+$_addon_continue = false;
+
+$_remote_username = null;
+$_remote_password = null;
+
+if (!empty($_SERVER['HTTP_SS_AUTH_USER'])) {
+    $_remote_username = $_SERVER['HTTP_SS_AUTH_USER'];
+}
+elseif (!empty($_SERVER['PHP_AUTH_USER'])) {
+    $_remote_username = $_SERVER['PHP_AUTH_USER'];
+}
+
+
+if (!empty($_SERVER['HTTP_SS_AUTH_PW'])) {
+    $_remote_password = $_SERVER['HTTP_SS_AUTH_PW'];
+}
+elseif (!empty($_SERVER['PHP_AUTH_PW'])) {
+    $_remote_password = $_SERVER['PHP_AUTH_PW'];
+}
+
+
+$addon_username = Registry::get('addons.shipstation.username');
+$addon_password = Registry::get('addons.shipstation.password');
+
+
+if ($_remote_username !== null &&
+    $_remote_password !== null &&
+    $_remote_username === $addon_username &&
+    $_remote_password === $addon_password) {
+    $_addon_continue = true;
+}
+
+
+// Invalid credentials - access denied.
+if (!$_addon_continue) {
+    die('Access denied - Wrong username or password');
+}
+// Valid credentials.
 if ($action == 'export') {
 
-    $username = empty($_SERVER['PHP_AUTH_USER']) ? $_SERVER['HTTP_SS_AUTH_USER'] : $_SERVER['PHP_AUTH_USER'];
-    $password = empty($_SERVER['PHP_AUTH_PW']) ? $_SERVER['HTTP_SS_AUTH_PW'] : $_SERVER['PHP_AUTH_PW'];
 
     //if (empty($_REQUEST['vendor']) || !fn_allowed_for('MULTIVENDOR')) {
-    $addon_username = Registry::get('addons.shipstation.username');
-    $addon_password = Registry::get('addons.shipstations.password');
+ 
     //} elseif (fn_allowed_for('MULTIVENDOR')) {
     //list($addon_username, $addon_password) = db_get_row("SELECT shipstation_username, shipstation_password FROM ?:companies WHERE company_id = ?i", $_REQUEST['vendor']);
     //}
 
-    if ($username == null ||
-        $password == null ||
-        $username != $addon_username ||
-        $password != $addon_password) {
-        die('Access denied - Wrong username or password');
-    }
 
     if (isset($_REQUEST['start_date'])) {
         $start_date = $_REQUEST['start_date'];
@@ -235,11 +266,12 @@ if ($action == 'export') {
         }
 
     }
-} else {
+}
+else {
     header("HTTP/1.0 200", true, 200);
     exit;
 }
 
 echo $post_data;
-
+    
 exit;
